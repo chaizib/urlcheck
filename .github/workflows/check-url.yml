@@ -1,0 +1,39 @@
+name: URL Check
+
+on:
+  schedule:
+    - cron: '0 8 * * *'     # UTC 08:00 → 北京 16:00
+    - cron: '0 20 * * *'    # UTC 20:00 → 北京 04:00 次日
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Check and record
+        env:
+          TARGET_URL: ${{ secrets.TARGET_URL }}
+          MAX_AGE_DAYS: 7
+          IS_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+        run: python .github/scripts/check_url.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add history/records.json README.md
+          git diff --staged --quiet || git commit -m "Update check records $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          git push

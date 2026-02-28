@@ -54,5 +54,13 @@
     "status": 200,
     "error": "",
     "trigger": "定时"
+  },
+  {
+    "time_utc": "2026-02-28T08:20:17+00:00",
+    "time_bj_short": "28 16:20",
+    "success": true,
+    "status": 200,
+    "error": "",
+    "trigger": "定时"
   }
 ]

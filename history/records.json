@@ -110,5 +110,13 @@
     "status": 200,
     "error": "",
     "trigger": "定时"
+  },
+  {
+    "time_utc": "2026-05-18T21:14:30+00:00",
+    "time_bj_short": "19 05:14",
+    "success": true,
+    "status": 200,
+    "error": "",
+    "trigger": "定时"
   }
 ]

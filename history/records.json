@@ -1,13 +1,5 @@
 [
   {
-    "time_utc": "2026-09-29T14:29:10+00:00",
-    "time_bj_short": "29 22:29",
-    "success": true,
-    "status": 200,
-    "error": "",
-    "trigger": "定时"
-  },
-  {
     "time_utc": "2026-09-29T23:31:17+00:00",
     "time_bj_short": "30 07:31",
     "success": true,
@@ -110,5 +102,13 @@
     "status": 200,
     "error": "",
     "trigger": "手动"
+  },
+  {
+    "time_utc": "2026-10-06T14:35:21+00:00",
+    "time_bj_short": "06 22:35",
+    "success": true,
+    "status": 200,
+    "error": "",
+    "trigger": "定时"
   }
 ]

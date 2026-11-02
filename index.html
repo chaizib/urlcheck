@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>站点状态监控看板</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 2px;
+        }
+        h1 {
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .status-pill.healthy {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--success-color);
+        }
+        .status-pill.unhealthy {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--danger-color);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .meta-item {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        .meta-item span {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .table-wrap {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            text-align: left;
+            table-layout: fixed;
+        }
+        th {
+            background-color: #0f172a;
+            color: var(--text-muted);
+            padding: 8px 6px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+        td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        th:nth-child(1), td.col-time { width: 28%; }
+        th:nth-child(2), td:nth-child(2) { width: 18%; }
+        th:nth-child(3), td:nth-child(3) { width: 16%; }
+        th:nth-child(4), td.col-error { width: 24%; }
+        th:nth-child(5), td:nth-child(5) { width: 14%; text-align: right; padding-right: 8px; }
+        th:nth-child(5) { text-align: right; padding-right: 8px; }
+
+        .badge {
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .badge-success {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--success-color);
+        }
+        .badge-danger {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger-color);
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 站点监控</h1>
+            <div class="status-pill healthy">运行正常</div>
+        </header>
+
+        <div class="card">
+            <div class="meta-item">更新：<span>2026-11-02 10:26:26</span></div>
+        </div>
+
+        <div class="card" style="padding: 0; overflow: hidden;">
+            <div style="padding: 10px 12px; border-bottom: 1px solid var(--border-color); font-weight: 600; font-size: 0.8rem;">
+                最近访问记录（7天）
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>结果</th>
+                            <th>状态</th>
+                            <th>错误</th>
+                            <th style="text-align: right; padding-right: 8px;">方式</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+        <tr>
+            <td class="col-time">11-02 10:26</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">✋</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">11-02 10:07</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">✋</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">11-02 10:04</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">✋</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">11-02 07:18</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">11-01 19:37</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">11-01 06:58</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-31 18:42</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-31 07:25</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-30 19:09</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-30 07:45</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-29 19:15</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-29 07:48</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-28 18:57</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-28 07:25</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-27 18:10</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-27 07:30</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+        <tr>
+            <td class="col-time">10-26 18:43</td>
+            <td><span class="badge badge-success">成功</span></td>
+            <td><code>200</code></td>
+            <td class="col-error">—</td>
+            <td style="text-align: right; padding-right: 8px;">⏰</td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            GitHub Actions & Vercel
+        </footer>
+    </div>
+</body>
+</html>
